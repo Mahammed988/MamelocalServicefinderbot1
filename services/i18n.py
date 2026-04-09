@@ -122,11 +122,6 @@ STRINGS = {
         "language_set": "✅ Afaan Oromoo filatame.",
     },
 }
-    """Translate a key to the given language."""
-    text = STRINGS.get(lang, STRINGS["en"]).get(key, STRINGS["en"].get(key, key))
-    if kwargs:
-        text = text.format(**kwargs)
-    return text
 
 
 def t(key: str, lang: str = "en", **kwargs) -> str:
