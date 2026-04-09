@@ -98,6 +98,9 @@ def my_business_keyboard(biz_id: int, is_open: bool) -> InlineKeyboardMarkup:
 def admin_keyboard() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup([
         [InlineKeyboardButton("📋 Pending Approvals", callback_data="admin:pending")],
+        [InlineKeyboardButton("💳 Pending Payments", callback_data="admin:payments")],
+        [InlineKeyboardButton("🏪 Manage Listings", callback_data="admin:listings")],
+        [InlineKeyboardButton("👥 Manage Users", callback_data="admin:users")],
         [InlineKeyboardButton("📊 Analytics", callback_data="admin:analytics")],
         [InlineKeyboardButton("📢 Broadcast", callback_data="admin:broadcast")],
         [InlineKeyboardButton("⭐ Manage Featured", callback_data="admin:featured")],

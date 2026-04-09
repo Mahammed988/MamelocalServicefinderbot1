@@ -28,7 +28,7 @@ STRINGS = {
             "/register — Register your business\n"
             "/mybusiness — Manage your listings\n"
             "/language — Change language\n\n"
-            "Need help? Contact @support"
+            "Need help? Contact @Mame241"
         ),
         "rate_prompt": "⭐ Rate this business (1–5):",
         "rate_saved": "✅ Review saved, thank you!",
@@ -68,7 +68,7 @@ STRINGS = {
             "/register — سجّل نشاطك التجاري\n"
             "/mybusiness — إدارة قوائمك\n"
             "/language — تغيير اللغة\n\n"
-            "تحتاج مساعدة؟ تواصل مع @support"
+            "تحتاج مساعدة؟ تواصل مع @Mame241"
         ),
         "rate_prompt": "⭐ قيّم هذا النشاط التجاري (1–5):",
         "rate_saved": "✅ تم حفظ تقييمك، شكراً!",
@@ -108,7 +108,7 @@ STRINGS = {
             "/register — Daldala kee galmeessi\n"
             "/mybusiness — Galmeewwan kee bulchi\n"
             "/language — Afaan jijjiiri\n\n"
-            "Gargaarsa barbaaddaa? @support qunnamaa"
+            "Gargaarsa barbaaddaa? @Mame241 qunnamaa"
         ),
         "rate_prompt": "⭐ Daldala kana madaali (1–5):",
         "rate_saved": "✅ Madaalliin kee kuufame, galatoomaa!",
