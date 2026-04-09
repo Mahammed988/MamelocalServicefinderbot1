@@ -50,6 +50,20 @@ async def menu_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
+async def whoami_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Debug: shows user's Telegram ID and whether they are admin."""
+    from config import ADMIN_IDS
+    user = update.effective_user
+    is_admin = user.id in ADMIN_IDS
+    await update.message.reply_text(
+        f"🆔 Your Telegram ID: `{user.id}`\n"
+        f"👤 Name: {user.full_name}\n"
+        f"🔑 Admin: {'✅ Yes' if is_admin else '❌ No'}\n"
+        f"📋 Admin IDs configured: `{ADMIN_IDS}`",
+        parse_mode="Markdown",
+    )
+
+
 async def language_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "🌐 Choose your language / اختر لغتك:",
@@ -78,5 +92,6 @@ def get_handlers():
         CommandHandler("start", start),
         CommandHandler("help", help_command),
         CommandHandler("menu", menu_command),
+        CommandHandler("whoami", whoami_command),
         CommandHandler("language", language_command),
     ]

@@ -35,6 +35,24 @@ logger = logging.getLogger(__name__)
 def main():
     init_db()
     logger.info("Database initialized.")
+    logger.info("Admin IDs loaded: %s", ADMIN_IDS)
+    logger.info("Bot token set: %s", "YES" if BOT_TOKEN else "NO - BOT_TOKEN missing!")
+
+    # Auto-seed if database is empty (first deploy on Railway/fresh PostgreSQL)
+    from db.models import SessionLocal
+    from db.models import Business
+    db = SessionLocal()
+    try:
+        count = db.query(Business).count()
+        if count == 0:
+            logger.info("Empty database detected — running seed...")
+            from seed import seed
+            seed()
+            logger.info("Seed complete.")
+    except Exception as e:
+        logger.warning("Seed check failed: %s", e)
+    finally:
+        db.close()
 
     # Register bot commands — shows in Telegram's menu button (bottom-left)
     from telegram import BotCommand

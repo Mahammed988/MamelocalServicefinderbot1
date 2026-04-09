@@ -4,8 +4,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Bot
-BOT_TOKEN = os.getenv("BOT_TOKEN", "8782685447:AAHXCb8Yz3e5bgpkp8CMXcXutdopqmAPb5o")
-ADMIN_IDS = list(map(int, os.getenv("ADMIN_IDS", "123456789").split(",")))
+BOT_TOKEN = os.getenv("BOT_TOKEN", "")
+_admin_ids_raw = os.getenv("ADMIN_IDS", "6411140505,5892363411")
+try:
+    ADMIN_IDS = list(map(int, _admin_ids_raw.split(",")))
+except ValueError:
+    ADMIN_IDS = [6411140505, 5892363411]
 
 # Database
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./bot.db")
