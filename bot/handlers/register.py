@@ -239,20 +239,23 @@ async def cancel_listing_payment(update: Update, context: ContextTypes.DEFAULT_T
 
 
 async def _notify_admins_new_listing(context, biz_id, biz_name, user):
+    from config import ADMIN_IDS
     owner_tag = f"@{user.username}" if user.username else f"ID {user.id}"
     msg = (
         f"🆕 *New Free Listing*\n\n"
         f"🏪 *{biz_name}*\n"
         f"👤 Owner: {owner_tag}"
     )
+    logger.info("Notifying admins %s about new listing: %s", ADMIN_IDS, biz_name)
     for admin_id in ADMIN_IDS:
         try:
             await context.bot.send_message(
                 admin_id, msg, parse_mode="Markdown",
                 reply_markup=approve_business_keyboard(biz_id),
             )
+            logger.info("✅ Notified admin %s", admin_id)
         except Exception as e:
-            logger.error("Failed to notify admin %s: %s", admin_id, e)
+            logger.error("❌ Failed to notify admin %s: %s", admin_id, e)
 
 
 async def _cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):

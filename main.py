@@ -124,8 +124,17 @@ def main():
     )
 
     logger.info("Bot started. Polling...")
-    app.run_polling(drop_pending_updates=True)
 
+    async def error_handler(update, context):
+        logger.error("Unhandled exception: %s", context.error, exc_info=context.error)
+        if update and update.effective_message:
+            try:
+                await update.effective_message.reply_text("⚠️ An error occurred. Please try again.")
+            except Exception:
+                pass
+
+    app.add_error_handler(error_handler)
+    app.run_polling(drop_pending_updates=True)
 
 if __name__ == "__main__":
     main()

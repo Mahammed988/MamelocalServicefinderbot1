@@ -64,6 +64,29 @@ async def whoami_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
+async def testnotify_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Admin only: test that notifications reach all admin IDs."""
+    from config import ADMIN_IDS
+    user = update.effective_user
+    if user.id not in ADMIN_IDS:
+        await update.message.reply_text("⛔ Admin only.")
+        return
+
+    results = []
+    for admin_id in ADMIN_IDS:
+        try:
+            await context.bot.send_message(
+                admin_id,
+                f"🔔 Test notification from `/testnotify`\nSent by: `{user.id}`",
+                parse_mode="Markdown",
+            )
+            results.append(f"✅ {admin_id}")
+        except Exception as e:
+            results.append(f"❌ {admin_id}: {e}")
+
+    await update.message.reply_text("\n".join(results))
+
+
 async def language_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "🌐 Choose your language / اختر لغتك:",
@@ -93,5 +116,6 @@ def get_handlers():
         CommandHandler("help", help_command),
         CommandHandler("menu", menu_command),
         CommandHandler("whoami", whoami_command),
+        CommandHandler("testnotify", testnotify_command),
         CommandHandler("language", language_command),
     ]
