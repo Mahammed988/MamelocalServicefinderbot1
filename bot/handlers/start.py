@@ -106,7 +106,7 @@ async def language_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     finally:
         db.close()
 
-    msg = "✅ Language set to English." if lang == "en" else "✅ تم تعيين اللغة إلى العربية."
+    msg = "✅ Language set to English." if lang == "en" else ("✅ تم تعيين اللغة إلى العربية." if lang == "ar" else "✅ Afaan Oromoo filatame.")
     await query.edit_message_text(msg)
 
 

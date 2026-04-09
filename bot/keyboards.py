@@ -118,6 +118,7 @@ def language_keyboard() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup([
         [InlineKeyboardButton("🇬🇧 English", callback_data="lang:en"),
          InlineKeyboardButton("🇸🇦 العربية", callback_data="lang:ar")],
+        [InlineKeyboardButton("🟢 Afaan Oromoo", callback_data="lang:or")],
     ])
 
 

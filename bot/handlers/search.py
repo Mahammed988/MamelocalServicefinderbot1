@@ -10,7 +10,7 @@ from bot.keyboards import (
     categories_keyboard, location_keyboard, business_card_keyboard,
     main_menu_keyboard, remove_keyboard, see_results_keyboard,
 )
-from bot.formatters import format_business_card
+from bot.formatters import format_business_card, format_business_summary
 from services.i18n import t
 from config import RESULTS_PER_PAGE
 
@@ -158,17 +158,19 @@ async def show_results_callback(update: Update, context: ContextTypes.DEFAULT_TY
     except Exception:
         pass
 
-    for item in page_results:
+    for i, item in enumerate(page_results):
         biz = item["business"]
         dist = item["distance"]
-        text = format_business_card(biz, dist, lang)
+        # Show summary only — name, category, status, distance
+        # Full details (phone, location) revealed when customer taps Details
+        text = format_business_summary(biz, start + i + 1, dist, lang)
         kb = business_card_keyboard(
             biz["id"],
-            phone=biz["phone"],
+            phone=None,           # hidden in summary
             telegram_username=biz["telegram_username"],
-            whatsapp=biz["whatsapp"],
-            lat=biz["latitude"],
-            lon=biz["longitude"],
+            whatsapp=None,        # hidden in summary
+            lat=None,             # map hidden in summary
+            lon=None,
         )
         await query.message.reply_text(text, parse_mode="Markdown", reply_markup=kb)
 

@@ -81,7 +81,52 @@ STRINGS = {
         "language_select": "🌐 اختر لغتك:",
         "language_set": "✅ تم تعيين اللغة إلى العربية.",
     },
+    "or": {
+        "welcome": (
+            "👋 *Tajaajila Naannoo Barbaaduu Bot*-tti baga nagaan dhuftan!\n\n"
+            "Tajaajila naannoo barbaadi ykn daldala kee galmeessi.\n"
+            "Filannoowwan armaan gadii fayyadami."
+        ),
+        "main_menu": "🏠 Menuu Jalqabaa",
+        "choose_category": "📂 Gosa filadhu:",
+        "share_location": "📍 Bakka jirtu qoodaa ykn maqaa naannoo barreessi:",
+        "searching": "🔍 Barbaadaa jira...",
+        "no_results": "😕 Daldalli hin argamne. Naannoo ykn gosa biraa yaalii.",
+        "results_header": "🔍 Bu'aa *{count}* argame:",
+        "register_start": "🏪 Daldala kee galmeessina!\n\nMaqaan daldala kee maal?",
+        "ask_category": "📂 Gosa daldala kee filadhu:",
+        "ask_phone": "📞 Lakkoofsa bilbila daldala kee galchi:",
+        "ask_location": "📍 Bakka daldala kee qoodaa ykn maqaa naannoo barreessi:",
+        "ask_description": "📝 Ibsa gabaabaa ida'i (ykn /skip barreessi):",
+        "registered_ok": "✅ Daldalli galmeeffame! Hayyama bulchiinsaa eegaa jira.",
+        "no_business": "Daldala galmeeffame hin qabdu.",
+        "help_text": (
+            "ℹ️ *Bot kana akkamitti fayyadamuu:*\n\n"
+            "🔍 *Tajaajila Barbaadi* — Gosa ykn keyword barbaadi\n"
+            "🏪 *Gosawwan* — Gosawwan tajaajila hunda ilaali\n"
+            "⭐ *Filatamoo* — Daldalawwan beekamoo ilaali\n"
+            "/register — Daldala kee galmeessi\n"
+            "/mybusiness — Galmeewwan kee bulchi\n"
+            "/language — Afaan jijjiiri\n\n"
+            "Gargaarsa barbaaddaa? @support qunnamaa"
+        ),
+        "rate_prompt": "⭐ Daldala kana madaali (1–5):",
+        "rate_saved": "✅ Madaalliin kee kuufame, galatoomaa!",
+        "open": "🟢 Banaa",
+        "closed": "🔴 Cufaa",
+        "featured_badge": "⭐ Filatamaa",
+        "admin_only": "⛔ Bulchiinsa qofa.",
+        "broadcast_prompt": "📢 Ergaa fayyadamtoota hundaaf erguu galchi:",
+        "broadcast_sent": "✅ Ergaan fayyadamtoota {count} dhaqqabe.",
+        "language_select": "🌐 Afaan kee filadhu:",
+        "language_set": "✅ Afaan Oromoo filatame.",
+    },
 }
+    """Translate a key to the given language."""
+    text = STRINGS.get(lang, STRINGS["en"]).get(key, STRINGS["en"].get(key, key))
+    if kwargs:
+        text = text.format(**kwargs)
+    return text
 
 
 def t(key: str, lang: str = "en", **kwargs) -> str:

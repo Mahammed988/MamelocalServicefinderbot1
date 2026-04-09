@@ -163,8 +163,12 @@ async def details_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             text = format_business_detail(biz, avg, count, lang=lang)
             from bot.keyboards import business_card_keyboard
             kb = business_card_keyboard(
-                biz.id, biz.phone, biz.telegram_username, biz.whatsapp,
-                lat=biz.latitude, lon=biz.longitude,
+                biz.id if hasattr(biz, 'id') else biz['id'],
+                phone=biz.phone if hasattr(biz, 'phone') else biz.get('phone'),
+                telegram_username=biz.telegram_username if hasattr(biz, 'telegram_username') else biz.get('telegram_username'),
+                whatsapp=biz.whatsapp if hasattr(biz, 'whatsapp') else biz.get('whatsapp'),
+                lat=biz.latitude if hasattr(biz, 'latitude') else biz.get('latitude'),
+                lon=biz.longitude if hasattr(biz, 'longitude') else biz.get('longitude'),
             )
             await query.edit_message_text(text, parse_mode="Markdown", reply_markup=kb)
         else:

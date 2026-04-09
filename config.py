@@ -35,6 +35,7 @@ CATEGORIES = {
     "mobile_clinic": "🏥 Mobile Clinic",
     "supermarket": "🛒 Supermarket",
     "electronics": "📱 Electronics",
+    "hotel": "🏨 Hotel",
 }
 
 CATEGORY_EMOJIS = {
@@ -43,4 +44,5 @@ CATEGORY_EMOJIS = {
     "mobile_clinic": "🏥",
     "supermarket": "🛒",
     "electronics": "📱",
+    "hotel": "🏨",
 }
