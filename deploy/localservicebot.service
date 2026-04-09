@@ -1,0 +1,15 @@
+[Unit]
+Description=Local Service Finder Telegram Bot
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/local-service-finder-bot
+EnvironmentFile=/root/local-service-finder-bot/.env
+ExecStart=/usr/bin/python3 main.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
