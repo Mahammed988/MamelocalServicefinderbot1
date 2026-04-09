@@ -110,10 +110,21 @@ class CustomerViewAccess(Base):
 
 
 # DB setup
-engine = create_engine(
-    DATABASE_URL,
-    connect_args={"check_same_thread": False} if "sqlite" in DATABASE_URL else {},
-)
+def _make_engine():
+    url = DATABASE_URL
+    # Railway PostgreSQL URLs start with postgres:// — SQLAlchemy needs postgresql://
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql+pg8000://", 1)
+    elif url.startswith("postgresql://") and "pg8000" not in url:
+        url = url.replace("postgresql://", "postgresql+pg8000://", 1)
+
+    kwargs = {}
+    if "sqlite" in url:
+        kwargs["connect_args"] = {"check_same_thread": False}
+
+    return create_engine(url, **kwargs)
+
+engine = _make_engine()
 SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
 
